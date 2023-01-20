@@ -7,7 +7,7 @@ public class GenericRepository<T> {
     private int emptyIndex = 0;
 
     public GenericRepository(GenericRepository<T> repo) {
-        //copyof
+        //
     }
     public GenericRepository() {
         elements = new Object[5];
