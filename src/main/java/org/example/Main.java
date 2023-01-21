@@ -1,10 +1,8 @@
 package org.example;
 
 import org.example.base.BaseClass;
-import org.example.genericrepository.GeneralRepository;
 import org.example.genericrepository.GeneralRepositoryImpl;
 
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -31,16 +29,24 @@ public class Main {
         genericRepository.printAll();
 
         System.out.println();
-        
+
         System.out.println("get element by Index:" + genericRepository.get(2));
         System.out.println("get element by id:" + genericRepository.getById(15));
         genericRepository.update(2, num4);
         System.out.println("update:" + genericRepository.get(2));
         System.out.println("findFirst:" + genericRepository.findFirst(12));
+        System.out.println("findFirstById:"+genericRepository.findFirstById(14));
+
+        System.out.println("subElements:");
+        genericRepository.subElements(0, 1).printAll();
+        System.out.println();
+        
+        System.out.println("Contain:"+genericRepository.contain(12));
+        System.out.println();
 
         genericRepository.remove(2);
         genericRepository.removeByElement(11);
-        System.out.println("findFirstById:"+genericRepository.findFirstById(14));
+        genericRepository.removeAll(12);
         genericRepository.printAll();
         genericRepository.clear();
 

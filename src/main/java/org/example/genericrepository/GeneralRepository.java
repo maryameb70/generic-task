@@ -12,5 +12,7 @@ public interface GeneralRepository<T> {
 
     int findFirstById(T id);
 
+    boolean contain(T id);
+
 
 }

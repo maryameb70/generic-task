@@ -9,7 +9,7 @@ public class GeneralRepositoryImpl<T> implements GeneralRepository<T> {
     private int emptyIndex = 0;
 
     public GeneralRepositoryImpl() {
-        this.elements = new BaseClass[5];
+        this.elements = new BaseClass[100];
     }
 
     public GeneralRepositoryImpl(int size) {
@@ -21,7 +21,7 @@ public class GeneralRepositoryImpl<T> implements GeneralRepository<T> {
     }
 
     private void extendArray() {
-        BaseClass[] resizeArray = new BaseClass[elements.length + 5];
+        BaseClass[] resizeArray = new BaseClass[elements.length + 100];
         for (int i = 0; i < elements.length; i++) {
             resizeArray[i] = elements[i];
         }
@@ -67,6 +67,35 @@ public class GeneralRepositoryImpl<T> implements GeneralRepository<T> {
         shiftArray();
     }
 
+    @Override
+    public void removeByElement(T element) {
+        int i = findFirst(element);
+        if (i == -1) {
+            return;
+        }
+        remove(i);
+    }
+
+    public void removeAll(T element) {
+        if (element != null) {
+            for (int i = 0; i < elements.length; i++) {
+                if (elements[i] != null && element.equals(elements[i].getId())) {
+                    remove(i);
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean contain(T id) {
+        for (int i = 0; i < elements.length; i++) {
+            if (elements[i] != null && elements[i].getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void shiftArray() {
         for (int i = emptyIndex; i < elements.length - 1; i++) {
             elements[i] = elements[i + 1];
@@ -95,15 +124,6 @@ public class GeneralRepositoryImpl<T> implements GeneralRepository<T> {
         return -1;
     }
 
-    @Override
-    public void removeByElement(T element) {
-        int i = findFirst(element);
-        if (i == -1) {
-            return;
-        }
-        remove(i);
-    }
-
     private boolean isIndexInvalid(int index) {
         if (index < 0 || index >= elements.length) {
             return true;
@@ -111,8 +131,22 @@ public class GeneralRepositoryImpl<T> implements GeneralRepository<T> {
         return false;
     }
 
+    public GeneralRepositoryImpl<T> subElements(int from, int to) {
+        if (from < 0 || from > to || to >= elements.length) {
+            return null;
+        }
+        GeneralRepositoryImpl<T> gr = new GeneralRepositoryImpl<>();
+        BaseClass<T>[] temp = new BaseClass[to - from + 1];
+        int index = 0;
+        for (int i = from; i <= to; i++) {
+            temp[index++] = elements[i];
+        }
+        gr.elements = temp;
+        return gr;
+    }
+
     public void clear() {
-        elements = new BaseClass[5];
+        elements = new BaseClass[100];
     }
 
     @Override
