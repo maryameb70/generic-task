@@ -9,11 +9,6 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
 
-//        Object[] array=new Object[]{11,12,13,14,15};
-//        Object[] temp=new Object[array.length+5];
-//        System.arraycopy(array,0,temp,0,array.length);
-//        System.out.println(Arrays.toString(temp));
-
         GeneralRepositoryImpl<Integer> genericRepository = new GeneralRepositoryImpl<>();
         BaseClass<Integer> num1 = new BaseClass<>();
         num1.setId(11);
@@ -36,6 +31,7 @@ public class Main {
         genericRepository.printAll();
 
         System.out.println();
+        
         System.out.println("get element by Index:" + genericRepository.get(2));
         System.out.println("get element by id:" + genericRepository.getById(15));
         genericRepository.update(2, num4);
@@ -45,7 +41,6 @@ public class Main {
         genericRepository.remove(2);
         genericRepository.removeByElement(11);
         System.out.println("findFirstById:"+genericRepository.findFirstById(14));
-      //  genericRepository.removeAll(12);
         genericRepository.printAll();
         genericRepository.clear();
 
